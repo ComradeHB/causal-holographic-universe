@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite our paper."
+authors:
+  - family-names: "Anderson"
+    given-names: "Heidi"
+    email: "heidilanderson0@gmail.com"
+title: "Causal Holographic Universe: dS/CFT Toy Model"
+version: 1.0.0
+date-released: 2026-02-12
+doi: 10.5281/zenodo.XXXXXXX
+repository-code: "https://github.com/ComradeHB/causal-holographic-universe"
+license: MIT
