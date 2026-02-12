@@ -525,3 +525,23 @@ for p_a in p_a_vals:
                         b = net.boundary()
                         if len(b) > 1:
                             u, v = np.random.choice(b, 2, replace
+                                                    # ------------------------------------------------------------
+# Save results to files (for figure generation)
+# ------------------------------------------------------------
+import pickle
+
+# Convert defaultdict to dict for pickling
+results_dict = dict(results)
+
+with open('slope_data.pkl', 'wb') as f:
+    pickle.dump({
+        'p_a_vals': p_a_vals,
+        'chi_vals': chi_vals,
+        'p_g_vals': p_g_vals,
+        'results': results_dict,
+        'target_size': TARGET,
+        'boundary_link_prob': BOUNDARY_LINK_PROB,
+        'n_seeds': N_SEEDS
+    }, f)
+
+print("\n✅ Results saved to slope_data.pkl")
