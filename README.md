@@ -1,5 +1,4 @@
-
-# Causal Holographic Universe
+# Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +7,7 @@
 
 This repository contains the complete simulation code and analysis pipeline for the paper:
 
-> **"Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography"**  
+> **"Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography"**  
 > Heidi Anderson (Independent Researcher), February 2026  
 > *Submitted to Physical Review E. Preprint available on arXiv.*
 
@@ -24,8 +23,8 @@ This repository implements a **causal random graph model** for de Sitter hologra
 
 ### 🔑 Key contributions
 - First tunable, numerically tractable causal graph model for dS/CFT
+- **Ensemble simulations** with error bars and finite‑size scaling (10 seeds per config, 8 for finite‑size)
 - Perfect **linear scaling** of boundary minimal cuts across all parameters
-- Ensemble simulations with error bars and finite‑size scaling
 - Analytical mean‑field estimate \(\langle k_{\text{bulk}} \rangle = (1-p_a)^{-1}\)
 
 ### 📊 Main results
@@ -44,7 +43,6 @@ causal-holographic-universe/
 ├── data/                         # Summary CSV files with means and std devs
 │   ├── slope_summary.csv
 │   └── finite_size_slopes.csv
-├── docs/                         # (optional – you may delete this folder)
 ├── figures/                      # Publication‑ready PDFs + figure generation script
 │   ├── generate_figures.py
 │   ├── slope_vs_pa_ensemble (4) (1).pdf
@@ -202,8 +200,8 @@ Pull requests and issues are welcome!
 If you use this code or ideas from the paper in your own research, please cite:
 
 ```bibtex
-@article{Anderson2026causal,
-  title     = {Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography},
+@article{Anderson2026ensemble,
+  title     = {Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography},
   author    = {Anderson, Heidi},
   journal   = {arXiv preprint arXiv:YYMM.NNNNN},
   year      = {2026},
