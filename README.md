@@ -17,7 +17,7 @@ Both papers introduce and explore a **causal random graph model** for de Sitter 
 - 📄 **Paper 1:** [arXiv:YYMM.NNNNN [gr-qc, hep-th]](https://arxiv.org/abs/YYMM.NNNNN) *(update when available)*  
 - 📄 **Paper 2:** [arXiv:YYMM.NNNNN [gr-qc, hep-th]](https://arxiv.org/abs/YYMM.NNNNN) *(update when available)*  
 - 🐙 **Code:** https://github.com/ComradeHB/causal-holographic-universe  
-- 🏛️ **DOI (Paper 1):** [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)  
+- 🏛️ **DOI (Paper 1):** [10.5281/zenodo.18626027](https://doi.org/10.5281/zenodo.XXXXXXX)  
 - 🏛️ **DOI (Paper 2):** [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX) *(to be assigned)*
 
 ---
