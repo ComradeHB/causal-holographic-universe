@@ -432,7 +432,7 @@ If you use this code or ideas from the paper in your own research, please cite:
 }
 ```
 
-A CITATION.cff file is included in this repository – GitHub will automatically show a "Cite this repository" button.
+A.
 
 ---
 
