@@ -5,7 +5,7 @@
 [![Paper 2](https://img.shields.io/badge/Paper 2-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/doi: 10.5281/zenodo.XXXXXXX)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
 This repository contains the complete simulation code and analysis pipeline for two companion papers:
 
