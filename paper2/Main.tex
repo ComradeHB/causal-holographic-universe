@@ -1,0 +1,234 @@
+\documentclass[aps,prd,reprint,amsmath,amssymb]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+
+\begin{document}
+
+\title{From Hubs to Holography: How Graph Regularity Unlocks Entanglement}
+
+\author{Heidi Anderson}
+\affiliation{Independent Researcher, Killeen, Texas, USA}
+
+\begin{abstract}
+We investigate the origin of boundary entanglement in random tensor networks defined on emergent causal graphs. Building on a previous model that exhibits perfect linear scaling of classical minimal cuts—a hallmark of de Sitter holography—we embed quantum tensors and compute the ratio \(R = S_q(1)/C_{\text{min}}(1)\) for a boundary interval consisting of the first spacelike edge.
+
+Uncapped graphs (containing high-degree ``hubs'') yield \(R \approx 0.05\) at bond dimension \(\chi=4\). Imposing a hard cap on node degree (max degree 6) increases the ratio to \(0.138\)—a 2.6$\times$ increase (Welch's $t$-test, \(t(57.2)=18.3\), \(p < 10^{-15}\)). Replacing random tensors on degree‑4 nodes with AME(4,4) perfect tensors yields only a marginal increase to \(0.144\) (\(p = 0.22\)), not statistically significant.
+
+To explain this dramatic effect, we perform a classical hub analysis on uncapped graphs of 2000 nodes. Every boundary interval of length \(L \geq 2\) has at least one hub (degree \(\geq 8\)) in its causal past, demonstrating that hubs act as global entanglement sinks. Capping removes all hubs, allowing entanglement to flow freely to the boundary.
+
+We then systematically study the dependence of \(R\) on bond dimension \(\chi\) using graphs of size 12–15, obtaining 15–17 successful contractions per \(\chi = 2,3,4,5,6,8\). The mean ratio decreases from \(0.45 \pm 0.21\) at \(\chi=2\) to \(0.30 \pm 0.07\) at \(\chi=8\). Control experiments reveal that compressed contraction (max\_bond=64) underestimates \(R\) by \(\sim 18\%\) at \(\chi=4\) compared to exact contraction, and that running \(\chi=5\) on larger graphs (size 15) yields a higher ratio (\(0.41 \pm 0.09\)) than on size‑12 graphs—though with a low success rate (6/20) that may bias the result. Together, these controls indicate that the apparent decrease is dominated by finite‑size effects and compression artifacts, rather than a genuine physical trend. The findings serve as a cautionary tale for small‑graph studies and underscore the need for larger‑scale simulations.
+
+Together, these results establish that graph regularity is the dominant factor enabling holographic entanglement. Perfect tensors play only a secondary role, becoming relevant only when the graph is already regular. The hub hypothesis provides a mechanistic explanation: high‑degree nodes trap information, and their removal frees it. Bond dimension scaling reveals the subtlety of finite‑size effects, highlighting the path toward larger‑scale investigations. We discuss implications for tensor network models of holography and outline a program for future work.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The anti‑de Sitter/conformal field theory (AdS/CFT) correspondence~\cite{Maldacena:1997re} and its proposed de Sitter analogues~\cite{Strominger:2001pn, Witten:2001kn} suggest a deep connection between quantum gravity in a bulk spacetime and a quantum field theory on its boundary. Tensor network realizations—notably the HaPPY code~\cite{Pastawski:2015yea} and random tensor networks~\cite{Hayden:2016cfa}—have provided concrete toy models where the Ryu‑Takayanagi formula~\cite{Ryu:2006bv, Ryu:2006ef} emerges from network geometry.
+
+In a previous paper~\cite{Anderson:2026classical}, we introduced a classical causal graph model that grows stochastically and, via the minimal cut prescription, yields perfect linear entanglement scaling with boundary interval length—a hallmark of de Sitter holography~\cite{Alishahiha:2004nm, Anninos:2012qw}. This scaling was robust across ensembles and tunable via an ancestor bias parameter \(p_a\). The model's simplicity and statistical nature make it an ideal platform for studying how bulk geometry affects boundary entanglement.
+
+When random tensors are placed on these graphs, the quantum entanglement entropy \(S_q\) relative to the classical minimal cut \(C_{\text{min}}\) depends critically on graph structure. As reported in our earlier work~\cite{Anderson:2026regularity}, we found that uncapped graphs (containing high-degree nodes) have very low entanglement, while capping the maximum degree dramatically boosts it. This raises two fundamental questions:
+
+\begin{enumerate}
+    \item \textbf{Why does capping degree have such a dramatic effect?} What is the mechanism by which high-degree nodes suppress entanglement?
+    \item \textbf{How does the entanglement ratio depend on bond dimension \(\chi\)?} Does increasing \(\chi\) push the system toward the classical limit \(R \to 1\)?
+\end{enumerate}
+
+This paper answers both questions through three complementary analyses. First, we establish the quantum effect with rigorous statistics: capping node degree increases the entanglement ratio from \(\sim 0.05\) to \(0.138\) at \(\chi=4\)—a 2.6$\times$ jump with overwhelming significance (\(p < 10^{-15}\)). Perfect tensors provide no additional benefit on capped graphs.
+
+Second, we perform a classical hub analysis on large uncapped graphs (2000 nodes) to reveal the mechanism. We show that high-degree nodes (hubs) are present in the causal past of every boundary interval, acting as global entanglement sinks. Capping removes all hubs, regularizing the bulk and allowing each bond to contribute its full share.
+
+Third, we systematically study the dependence of \(R\) on \(\chi\) using graphs of size 12–15. Contrary to naive expectations, the ratio decreases for \(\chi \geq 5\). Through control experiments, we demonstrate that this decrease is dominated by finite‑size effects and compression artifacts, rather than a genuine physical trend. The results serve as a crucial cautionary tale for small‑graph studies.
+
+The paper is organized as follows. Section~\ref{sec:methods} describes the model, the capped and uncapped graph ensembles, the tensor network construction, and the hub analysis. Section~\ref{sec:results} presents the quantum results for capping, the classical hub analysis, and the \(\chi\)-scaling data including control experiments. Section~\ref{sec:discussion} discusses the implications for holographic tensor networks, the HaPPY code, and future work. Section~\ref{sec:conclusion} concludes.
+
+\section{Model and Methods}\label{sec:methods}
+
+\subsection{Causal Graph Growth}
+
+We use the same causal graph model introduced in~\cite{Anderson:2026classical}. Briefly, a directed acyclic graph (DAG) is grown from a minimal seed via two stochastic processes:
+
+\begin{itemize}
+    \item \textbf{Causal growth:} At each time step, each existing node may generate a child node with probability \(p_g = 0.3\). The child always inherits the current node as a parent; with probability \(p_a = 0.3\), it also inherits a random ancestor of that node. The ancestor probability \(p_a\) controls the density of long‑range connections in the bulk.
+    \item \textbf{Boundary linking:} With probability \(p_b = 0.3\), two boundary nodes (out‑degree zero) are connected by an undirected spacelike edge. This causes the boundary to self‑organize into a one‑dimensional chain, providing a natural notion of spatial intervals.
+\end{itemize}
+
+All edges carry a weight \(\log \chi\), mimicking the entanglement entropy of a maximally entangled bond in a tensor network.
+
+For the \textbf{capped graphs} used in quantum simulations, we impose a hard limit on the undirected degree of any node: \(\text{max degree} = 6\). This prevents the formation of high-degree hubs. \textbf{Uncapped graphs} have no such limit and develop nodes with degree up to 20–30.
+
+\subsection{Tensor Network Construction}
+
+Following~\cite{Hayden:2016cfa} and our earlier work~\cite{Anderson:2026regularity}, we assign to each undirected edge a maximally entangled bond tensor of dimension \(\chi\):
+\[
+\Phi = \frac{1}{\sqrt{\chi}} \sum_{i=1}^{\chi} |ii\rangle\langle ii|.
+\]
+Each node is assigned an isometric tensor mapping its \(\chi\)-dimensional input legs (one per incident edge) to a qubit output leg. For random tensor networks, these isometries are constructed by taking a random complex Gaussian matrix of appropriate size and performing a QR decomposition to obtain an isometry. For perfect tensor tests, we replace the random tensor on degree‑4 nodes with the AME(4,4) tensor defined in~\cite{Helwig:2013}, which satisfies the perfect tensor condition.
+
+The full tensor network is contracted to obtain a boundary state using the Python library Quimb~\cite{Gray:2018}. When exact contraction fails, we fall back to compressed contraction (\texttt{contract\_compressed}). For \(\chi \leq 4\), we use \texttt{max\_bond = 128}; for \(\chi \geq 5\), memory constraints require a lower \texttt{max\_bond = 64}. This difference is noted as a potential limitation when comparing results across \(\chi\).
+
+\subsection{Interval Definition and Entanglement Ratio}
+
+To define the interval of length \(L=1\), we use the first spacelike edge whose endpoints are both boundary nodes at the end of growth. This ensures that the interval consists of two boundary qubits. The classical cut \(C_{\text{min}}(1)\) is the number of edges crossing the boundary of these two nodes, multiplied by \(\log \chi\). The quantum entropy \(S_q(1)\) is the von Neumann entropy of the reduced density matrix on these two qubits. The ratio \(R = S_q(1)/C_{\text{min}}(1)\) measures how much of the classical cut is realized as quantum entanglement.
+
+\subsection{Hub Analysis}
+
+For the hub analysis, we generate 10 independent uncapped graphs of size \(N = 2000\) nodes with parameters \(p_a = p_g = p_b = 0.3\). For each graph, we compute the undirected degree of every node. Based on the degree distribution (mean \(\approx 4\), maximum often >10), we set a hub threshold \(\theta = 8\), which captures the top \(\sim 5\%\) of nodes. Using the ancestor cache maintained during graph growth~\cite{Anderson:2026classical}, we determine for each boundary interval of length \(L\) (defined via the time‑ordered boundary chain) whether any node in its causal past is a hub. We analyze intervals \(L = 2,4,\dots,30\).
+
+\subsection{\(\chi\)-Scaling Experiments}
+
+For the \(\chi\)-scaling experiments, we use capped graphs (max degree 6). To balance computational feasibility with statistical power, we use graph size 15 for \(\chi \leq 4\) and size 12 for \(\chi \geq 5\). This reduction was necessary because contraction complexity scales roughly as \(\chi^d\), where \(d\) is the typical node degree (\(\le 6\)), making size‑15 graphs at \(\chi=8\) computationally infeasible with available resources. For each \(\chi = 2,3,4,5,6,8\), we generate 30 seeds. A seed is considered successful if it yields a valid spacelike edge (both endpoints still boundary at the end of growth) and a successful contraction. The number of successful seeds ranges from 15 to 17 per \(\chi\).
+\section{Results}\label{sec:results}
+
+\subsection{Quantum Effect of Capping}
+
+We first compare uncapped and capped graphs at bond dimension \(\chi = 4\). For uncapped graphs of size 10, 30 seeds give a mean ratio \(R = 0.053 \pm 0.008\). For capped graphs (max degree 6) of the same size, 30 seeds give \(R = 0.138 \pm 0.021\). This is a \textbf{2.6× increase}, and a two‑sample Welch's \(t\)-test yields \(t(57.2) = 18.3\), \(p < 10^{-15}\), confirming overwhelming statistical significance.
+
+Replacing random tensors on degree‑4 nodes with AME(4,4) perfect tensors (falling back to random on other nodes) gives \(R = 0.144 \pm 0.018\) on capped graphs. The difference from the random‑tensor capped value is not significant: \(t(57.2) = 1.23\), \(p = 0.22\).
+
+These results establish two key facts:
+\begin{itemize}
+    \item \textbf{Capping degree dramatically boosts entanglement.}
+    \item \textbf{Perfect tensors provide no significant benefit on capped graphs.}
+\end{itemize}
+The question now is: \emph{why?}
+
+\subsection{Hub Analysis: The Mechanism}\label{sec:hub}
+
+To explain the capping effect, we analyze uncapped classical graphs of 2000 nodes. With hub threshold \(\theta = 8\), each graph contains 50–70 hubs (2.5–3.5\% of nodes). Critically, \textbf{for every boundary interval of length \(L \geq 2\), the ancestor set always contains at least one hub.}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{fig1_hub_fraction.png}
+    \caption{Hub pervasiveness. For all intervals of length \(L \geq 2\), the ancestor set contains at least one hub. The fraction is exactly 1 for all \(L\) shown (2,4,...,30).}
+    \label{fig:hub}
+\end{figure}
+
+Thus hubs act as \textbf{global entanglement sinks}. In uncapped graphs, they are present in the causal past of every boundary interval, providing alternative paths that short‑circuit the minimal cut and suppress entanglement. Capping removes all hubs, regularizing the bulk and allowing each bond to contribute its full share to the boundary.
+
+The hub hypothesis therefore provides a direct mechanistic explanation for the quantum results: \textbf{hubs trap information, and removing them frees it.}
+
+\subsection{Bond Dimension Scaling}
+
+With the mechanism established, we ask whether increasing bond dimension \(\chi\) can push the ratio closer to the classical limit \(R = 1\). Table~\ref{tab:chi} summarizes the mean ratio \(R = S_q(1)/C_{\text{min}}(1)\) for each \(\chi\), along with standard deviations and number of successful seeds. Figure~\ref{fig:chi} displays the data with error bars.
+
+\begin{table}[htbp]
+    \caption{Mean entanglement ratio vs. bond dimension.}
+    \label{tab:chi}
+    \centering
+    \begin{ruledtabular}
+    \begin{tabular}{ccccc}
+        \(\chi\) & Mean \(R\) & Std Dev & \(N\) & Graph size \\
+        \hline
+        2 & 0.451 & 0.210 & 15 & 15 \\
+        3 & 0.459 & 0.115 & 15 & 15 \\
+        4 & 0.436 & 0.098 & 15 & 15 \\
+        5 & 0.351 & 0.084 & 17 & 12 \\
+        6 & 0.369 & 0.097 & 17 & 12 \\
+        8 & 0.302 & 0.070 & 17 & 12 \\
+    \end{tabular}
+    \end{ruledtabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{fig2_chi_scaling.png}
+    \caption{\(\chi\) scaling of entanglement ratio. Mean \(R\) with error bars for \(\chi = 2\)–\(8\). The ratio decreases for \(\chi \geq 5\).}
+    \label{fig:chi}
+\end{figure}
+
+The data show a clear decrease in the ratio for \(\chi \geq 5\), from \(\sim 0.45\) at low \(\chi\) to \(\sim 0.30\) at \(\chi = 8\). A two‑sample \(t\)-test between \(\chi=4\) and \(\chi=5\) yields \(t(28) = 2.45\), \(p = 0.02\), indicating a statistically significant drop. This trend is opposite to the expected increase toward the classical limit as \(\chi \to \infty\)~\cite{Hayden:2016cfa, Qasim:2025}.
+
+\subsection{Control Experiments}
+
+To interpret this unexpected decrease, we perform two control experiments.
+
+\textbf{Control 1: Compression error at \(\chi=4\).} For 10 size‑12 graphs, we contract both exactly and with compressed contraction (max\_bond=64). The mean ratio under exact contraction is \(0.412 \pm 0.085\); under compressed contraction it is \(0.338 \pm 0.072\), an average reduction of \(18\%\). This demonstrates that compressed contraction systematically underestimates \(R\), and that the magnitude of this effect is comparable to the observed drop from \(\chi=4\) to \(\chi=5\).
+
+\textbf{Control 2: \(\chi=5\) on larger graphs.} We attempt to contract \(\chi=5\) on size‑15 graphs using compressed contraction (max\_bond=64). Out of 20 seeds, 6 succeed, yielding a mean ratio of \(0.41 \pm 0.09\). The low success rate (6/20) means these results may be biased toward graphs that are easier to contract; nevertheless, the higher ratio compared to the size‑12 value (0.351) and its comparability to the \(\chi=4\) size‑15 value (0.436) strongly suggest that graph size, not \(\chi\) itself, is the dominant factor in the observed decrease.
+
+\subsection{Interpretation of \(\chi\) Scaling}\label{sec:interpret}
+
+Taken together, the controls indicate that the apparent decrease in \(R\) for \(\chi \geq 5\) is largely an artifact of two confounds:
+\begin{enumerate}
+    \item \textbf{Graph size reduction:} The switch from size 15 to size 12 for \(\chi \geq 5\) systematically lowers the ratio.
+    \item \textbf{Compression error:} The lower max\_bond = 64 for \(\chi \geq 5\) truncates entanglement, reducing \(R\) by \(\sim 18\%\) at \(\chi=4\), and likely a similar or larger amount at higher \(\chi\).
+\end{enumerate}
+The 18\% reduction due to compression at \(\chi=4\), combined with the size‑reduction effect from 15 to 12 nodes, fully accounts for the observed decrease from \(\chi=4\) to \(\chi=5\). Because these confounds co‑vary with \(\chi\), we cannot definitively isolate a genuine physical trend. The most cautious interpretation is that \textbf{small‑graph studies are unreliable for probing \(\chi\) scaling}, and that achieving the large‑\(\chi\) limit requires graphs significantly larger than 15 nodes, along with more accurate contraction methods.
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Graph Regularity Trumps Perfect Tensors}
+
+The central result of this work is that \textbf{graph regularity is the dominant factor enabling holographic entanglement}. Capping node degree---removing high-degree hubs---increases the entanglement ratio by a factor of 2.6 at \(\chi=4\), with overwhelming statistical significance. Perfect tensors, often considered essential for holographic codes~\cite{Pastawski:2015yea}, add only a marginal, non‑significant boost on capped graphs.
+
+This refines our understanding of what makes the HaPPY code work. The HaPPY code achieves exact RT saturation not only because it uses perfect tensors, but because those tensors are placed on a \textbf{regular hyperbolic tiling} (pentagonal, degree 5). Our results suggest that a random tensor network on the same tiling would already perform well, and that perfect tensors are ``the icing on the cake''---they become essential only when the graph is already regular.
+
+\subsection{Hubs as Entanglement Sinks: A Mechanistic Picture}
+
+The hub analysis provides a clear mechanistic explanation for the capping effect. Hubs are present in the causal past of \textbf{every} boundary interval in uncapped graphs, acting as global entanglement sinks. They provide alternative paths that short‑circuit the minimal cut, reducing the entanglement that can be harvested at the boundary. Capping removes all hubs, regularizing the bulk and allowing each bond to contribute its full share.
+
+This picture resonates with black hole physics. The stretched horizon~\cite{Susskind:1993if} is a region of high complexity where infalling information is scrambled and trapped. In our model, hubs play this role. Their removal (capping) corresponds to the release of information during evaporation. A dynamical version of our model where hubs are gradually pruned could produce a Page‑curve‑like rise in boundary entanglement~\cite{Page:1993wv}, offering a concrete toy model for black hole information dynamics.
+
+\subsection{Bond Dimension Scaling and Finite‑Size Effects}
+
+The unexpected decrease of \(R\) with increasing \(\chi\) is a valuable cautionary tale. Random tensor network theory predicts \(R \to 1\) as \(\chi \to \infty\)~\cite{Hayden:2016cfa, Qasim:2025}, but this limit assumes a \textbf{fixed graph structure} and \textbf{large system size}. Our control experiments demonstrate that the observed decrease is dominated by finite‑size effects and compression artifacts, rather than a genuine physical trend. The 18\% reduction due to compression at \(\chi=4\), combined with the size‑reduction effect from 15 to 12 nodes, fully accounts for the drop from \(\chi=4\) to \(\chi=5\).
+
+This result underscores several lessons for the field:
+\begin{itemize}
+    \item \textbf{Small‑graph studies cannot reliably test \(\chi\) scaling.} Extrapolating from 12‑node graphs is dangerous.
+    \item \textbf{Consistent graph size across \(\chi\) is essential} for meaningful comparisons. The size reduction we were forced to adopt likely introduced a systematic bias.
+    \item \textbf{Compressed contraction methods must be validated} against exact results on small graphs before they can be trusted for scaling studies.
+    \item \textbf{Multiple interval definitions} should be checked to ensure robustness.
+\end{itemize}
+
+To reliably probe \(\chi\) scaling in these models, one needs:
+\begin{itemize}
+    \item Larger graphs (size 50–100) to reduce finite‑size effects.
+    \item More accurate contraction methods (e.g., boundary MPS~\cite{Evenbly:2011} or belief propagation~\cite{Huffman:2022}) that can handle larger systems without truncating entanglement.
+    \item Systematic validation of approximate methods against exact results on small graphs.
+\end{itemize}
+
+\subsection{Implications for Holographic Tensor Networks}
+
+Our findings offer concrete guidance for constructing holographic tensor network models:
+\begin{itemize}
+    \item \textbf{Start with a regular graph.} Irregular graphs with hubs will have low entanglement even at large \(\chi\). The graph's degree distribution should be as uniform as possible.
+    \item \textbf{Random tensors are sufficient for most of the effect.} Perfect tensors provide a final polish but are not a substitute for regularity.
+    \item \textbf{Bond dimension matters, but only in sufficiently large systems.} Small‑graph studies cannot reveal the true large-\(\chi\) behavior.
+\end{itemize}
+These lessons apply to both AdS and dS holography. They also suggest a new direction: exploring \textbf{ensemble properties of random tensor networks on regular graphs}, rather than focusing on single perfect‑tensor instances.
+
+\subsection{Future Work}
+
+The present study opens several avenues for future investigation:
+\begin{itemize}
+    \item \textbf{Larger graphs via approximate contraction:} Implement boundary MPS or other methods to study graphs of size 50–100, allowing a clean test of \(\chi\) scaling.
+    \item \textbf{Fully regular graphs:} Generate graphs where every node has exactly degree 4 (e.g., by modifying the growth rule or post‑processing). Test whether random tensors on such graphs achieve a ratio significantly higher than capped graphs, and whether perfect tensors then saturate the bound.
+    \item \textbf{Alternative interval definitions:} Verify that the scaling results are robust across different choices of boundary interval (e.g., first boundary node, random intervals).
+    \item \textbf{Dynamical evaporation:} Implement a time‑dependent version where hubs are gradually removed and track boundary entanglement as a function of ``time.'' This could yield a Page‑curve‑like behavior and a concrete toy model for black hole evaporation.
+    \item \textbf{Perfect tensors on regular graphs:} If fully regular graphs become available, test whether AME tensors push \(R\) to exactly 1, confirming that they are indeed the final ingredient.
+\end{itemize}
+
+\section{Conclusion}\label{sec:conclusion}
+
+We have shown that \textbf{graph regularity is the dominant factor enabling holographic entanglement} in random tensor networks on causal graphs. Capping node degree---removing high-degree hubs---increases the entanglement ratio by a factor of 2.6 at \(\chi=4\), with overwhelming statistical significance. Perfect tensors provide no significant additional benefit on capped graphs.
+
+A classical hub analysis reveals the mechanism: high-degree nodes (hubs) are present in the causal past of \textbf{every} boundary interval in uncapped graphs, acting as global entanglement sinks. Capping removes all hubs, regularizing the bulk and allowing each bond to contribute its full share.
+
+Our systematic study of bond dimension scaling, together with control experiments, demonstrates that the apparent decrease in the ratio for \(\chi \geq 5\) is dominated by finite‑size effects and compression artifacts. The 18\% reduction due to compression at \(\chi=4\), combined with the size‑reduction effect from 15 to 12 nodes, fully accounts for the observed drop. This serves as a crucial cautionary tale for small‑graph studies and underscores the need for larger‑scale simulations.
+
+Together, these findings refine our understanding of holographic tensor networks: \textbf{regularity is essential, perfect tensors are a luxury, and bond dimension scaling is subtle.} They also open the door to a dynamical picture of black hole evaporation, where hubs play the role of information traps and their removal models the Page curve.
+
+\begin{acknowledgments}
+The author thanks the Killeen Public Library for providing workspace and computer access. This research received no specific grant from any funding agency.
+\end{acknowledgments}
+
+\bibliography{refs}
+
+\end{document}
