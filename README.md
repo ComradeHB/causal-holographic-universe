@@ -1,37 +1,27 @@
-# Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography
+# Causal Graph Models for de Sitter Holography
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
+[![Paper 1](https://img.shields.io/badge/Paper 1-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
+[![Paper 2](https://img.shields.io/badge/Paper 2-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
-This repository contains the complete simulation code and analysis pipeline for the paper:
+This repository contains the complete simulation code and analysis pipeline for two companion papers:
 
-> **"Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography"**  
-> Heidi Anderson (Independent Researcher), February 2026  
-> *Submitted to Physical Review E. Preprint available on arXiv.*
+1. **Paper 1 (Classical)** – “Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography”  
+2. **Paper 2 (Quantum)** – “From Hubs to Holography: How Graph Regularity Unlocks Entanglement”  
 
-- 📄 **Paper:** [arXiv:YYMM.NNNNN [gr-qc, hep-th]](https://arxiv.org/abs/YYMM.NNNNN) *(update when available)*  
+Both papers introduce and explore a **causal random graph model** for de Sitter holography, first classically and then with quantum tensor networks.
+
+- 📄 **Paper 1:** [arXiv:YYMM.NNNNN [gr-qc, hep-th]](https://arxiv.org/abs/YYMM.NNNNN) *(update when available)*  
+- 📄 **Paper 2:** [arXiv:YYMM.NNNNN [gr-qc, hep-th]](https://arxiv.org/abs/YYMM.NNNNN) *(update when available)*  
 - 🐙 **Code:** https://github.com/ComradeHB/causal-holographic-universe  
-- 🏛️ **DOI:** [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX) *(Zenodo archive)*
+- 🏛️ **DOI (Paper 1):** [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)  
+- 🏛️ **DOI (Paper 2):** [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX) *(to be assigned)*
 
 ---
 
-## 📋 Description
-
-This repository implements a **causal random graph model** for de Sitter holography. The model grows directed acyclic graphs via a stochastic process with tunable **ancestor probability** \(p_a\). Entanglement entropy is defined via the Ryu–Takayanagi prescription as the **minimal cut** through the undirected graph, with each edge weighted by \(\log \chi\) (bond dimension).
-
-### 🔑 Key contributions
-- First tunable, numerically tractable causal graph model for dS/CFT
-- **Ensemble simulations** with error bars and finite‑size scaling (10 seeds per config, 8 for finite‑size)
-- Perfect **linear scaling** of boundary minimal cuts across all parameters
-- Analytical mean‑field estimate \(\langle k_{\text{bulk}} \rangle = (1-p_a)^{-1}\)
-
-### 📊 Main results
-- Slope \(dS/dL\) increases monotonically with \(p_a\)
-- Slope is linear in \(\log \chi\) with coefficient \(1 + p_a\)
-- Slope is independent of growth probability \(p_g\)
-- Pure tree limit (\(p_a = 0\)) gives slope exactly \(\log \chi\) (zero variance)
+## 📋 Repository Structure
 
 ---
 
