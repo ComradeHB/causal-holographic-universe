@@ -1,8 +1,22 @@
-## Paper 3: Hub Removal and the Vanishing of Entanglement
-- **Title:** Hub Removal and the Vanishing of Entanglement in Causal Graphs
-- **Author:** Heidi Anderson
-- **Status:** Submitted to Physical Review D (companion to Papers 1 & 2)
-- **PDF:** [`/paper3/paper3.pdf`](/paper3/paper3.pdf) – read immediately
-- **Data:** [`/paper3/data`](/paper3/data) – raw ensemble statistics
-- **Code:** [`/paper3/code`](/paper3/code) – simulation scripts
-- **DOI:** (to be added after acceptance)
+# Paper 3: Hub Removal and the Vanishing of Entanglement
+
+This folder contains the final PDF, figures, and bibliography for the third paper in the series.
+
+## Files
+- `Hub_Removal_and_the_Vanishing_of_Entanglement.pdf` – final compiled paper
+- `classical_ensemble.png` – Figure 1 (classical cut evolution with error band)
+- `quantum_ensemble.png` – Quantum entropy plot (for reference, not included in paper)
+- `Refs.bib` – bibliography file
+
+## Data and Code
+Raw ensemble data and simulation scripts will be added soon:
+- `data/` – CSV files with classical and quantum ensemble statistics
+- `code/` – Python scripts to reproduce all simulations and figures
+
+## Related Papers
+- **Paper 1:** Classical foundation ([`/paper1`](/paper1))
+- **Paper 2:** Mechanism discovery ([`/paper2`](/paper2))
+- **This Paper:** Dynamical confirmation ([`/paper3`](/paper3))
+
+## Citation
+If you use this work, please cite:
