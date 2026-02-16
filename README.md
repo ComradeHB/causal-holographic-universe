@@ -1,12 +1,289 @@
-
 # Causal Graph Models for de Sitter Holography
 
-[![Paper 1](https://img.shields.io/badge/Paper 1-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
-[![Paper 2](https://img.shields.io/badge/Paper 2-arXiv.YYMM.NNNNN-B3181B?logo=arXiv)](https://arxiv.org/abs/YYMM.NNNNN)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![DOI Paper 1](https://zenodo.org/badge/DOI/10.5281/zenodo.18626027.svg)](https://doi.org/10.5281/zenodo.18626027)
 [![DOI Paper 2](https://zenodo.org/badge/DOI/10.5281/zenodo.18647441.svg)](https://doi.org/10.5281/zenodo.18647441)
+[![DOI Paper 3](https://zenodo.org/badge/DOI/10.5281/zenodo.18665129.svg)](https://doi.org/10.5281/zenodo.18665129)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
+
+This repository contains the complete simulation code and analysis pipeline for three companion papers:
+
+1. **Paper 1 (Classical)** – “Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography”  
+2. **Paper 2 (Quantum)** – “From Hubs to Holography: How Graph Regularity Unlocks Entanglement”  
+3. **Paper 3 (Dynamics)** – “Hub Removal and the Vanishing of Entanglement in Causal Graphs”
+
+All papers introduce and explore a **causal random graph model** for de Sitter holography, building from classical foundations to quantum mechanisms and dynamical confirmation.
+
+- 📄 **Paper 1:** [DOI: 10.5281/zenodo.18626027](https://doi.org/10.5281/zenodo.18626027)
+- 📄 **Paper 2:** [DOI: 10.5281/zenodo.18647441](https://doi.org/10.5281/zenodo.18647441)
+- 📄 **Paper 3:** [DOI: 10.5281/zenodo.18665129](https://doi.org/10.5281/zenodo.18665129)
+- 🐙 **Code:** https://github.com/ComradeHB/causal-holographic-universe
+
+---
+
+## 📋 Repository Structure
+
+```
+
+causal-holographic-universe/
+├── paper1/                       # Paper 1: classical model
+│   ├── data/                      # Summary CSV files
+│   ├── figures/                    # Publication‑ready PDFs
+│   ├── scripts/                    # Parameter sweep scripts
+│   ├── src/                        # Core source code
+│   ├── README.md                   # Paper 1 details
+│   └── ... (other Paper 1 files)
+├── paper2/                       # Paper 2: quantum extension
+│   ├── Main.tex                    # LaTeX source
+│   ├── refs.bib                    # Bibliography
+│   ├── fig1_hub_fraction.png       # Figure 1
+│   ├── fig2_chi_scaling.png        # Figure 2
+│   └── README.md                   # Paper 2 details
+├── paper3/                       # Paper 3: dynamical confirmation
+│   ├── Hub_Removal_and_the_Vanishing_of_Entanglement.pdf  # Final paper
+│   ├── classical_ensemble.png      # Figure 1
+│   ├── quantum_ensemble.png        # Quantum entropy plot
+│   ├── refs.bib                    # Bibliography
+│   ├── data/                       # Raw ensemble data
+│   │   ├── classical_ensemble.csv
+│   │   ├── quantum_summary.csv
+│   │   └── quantum_detailed.csv
+│   └── README.md                   # Paper 3 details
+├── .gitignore
+├── CITATION.cff
+├── LICENSE
+├── README.md                     # This file (overview)
+└── requirements.txt              # Python dependencies
+
+```
+
+---
+
+## 📄 Paper 1: Classical Causal Graph Model
+
+**Title:** Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography  
+**Author:** Heidi Anderson  
+**Status:** Submitted to Physical Review D  
+**DOI:** [10.5281/zenodo.18626027](https://doi.org/10.5281/zenodo.18626027)
+
+### 🔑 Key contributions
+- First tunable, numerically tractable causal graph model for dS/CFT
+- **Ensemble simulations** with error bars and finite‑size scaling
+- Perfect **linear scaling** of boundary minimal cuts
+- Analytical mean‑field estimate \(\langle k_{\text{bulk}}\rangle = (1-p_a)^{-1}\)
+
+For full details, see the [`paper1/`](paper1/) folder.
+
+---
+
+## 📄 Paper 2: Quantum Extension – Graph Regularity vs. Perfect Tensors
+
+**Title:** From Hubs to Holography: How Graph Regularity Unlocks Entanglement  
+**Author:** Heidi Anderson  
+**Status:** Submitted to Physical Review D  
+**DOI:** [10.5281/zenodo.18647441](https://doi.org/10.5281/zenodo.18647441)
+
+### 🔑 Key contributions
+- **Capping node degree** increases entanglement ratio 2.6×
+- **Perfect tensors** provide no statistically significant benefit
+- **Hub analysis** shows every boundary interval has a hub in its causal past
+
+For source files, see the [`paper2/`](paper2/) folder.
+
+---
+
+## 📄 Paper 3: Dynamical Confirmation – Hub Removal
+
+**Title:** Hub Removal and the Vanishing of Entanglement in Causal Graphs  
+**Author:** Heidi Anderson  
+**Status:** Submitted to Physical Review D  
+**DOI:** [10.5281/zenodo.18665129](https://doi.org/10.5281/zenodo.18665129)
+
+### 🔑 Key contributions
+- **Dynamical hub removal** eliminates classical connectivity and quantum entanglement
+- Ensemble of 20 graphs confirms robustness
+- Vanishing variance across random splits and tensor seeds
+
+For source files, see the [`paper3/`](paper3/) folder.
+
+---
+
+## ⚙️ Requirements & Installation
+
+This project uses **Python 3.8+** and requires the following packages:
+
+```
+
+numpy
+networkx
+matplotlib
+scipy
+pandas
+quimb
+tqdm
+
+```
+
+### 🔹 Using pip
+
+```bash
+git clone https://github.com/ComradeHB/causal-holographic-universe.git
+cd causal-holographic-universe
+pip install -r requirements.txt
+```
+
+🔹 Using Conda (recommended for reproducibility)
+
+```bash
+conda env create -f environment.yml
+conda activate causal-holography
+```
+
+---
+
+🚀 Reproducing the Paper Results
+
+📈 Paper 1 – Figures 1–3 (Ensemble sweeps)
+
+```bash
+python paper1/scripts/sweep_pa_chi_pg_ensemble.py
+```
+
+📉 Paper 1 – Figure 4 (Finite‑size scaling)
+
+```bash
+python paper1/scripts/sweep_finite.py
+```
+
+🖼️ Paper 1 – Generating the PDF figures
+
+```bash
+python paper1/figures/generate_figures.py
+```
+
+🔬 Paper 2 & 3 – Quantum simulations
+
+Simulation scripts are available in each paper's folder. See the respective README.md files for details.
+
+---
+
+🧠 Algorithm Overview (Common to All Papers)
+
+1. Causal growth – Start from a causal diamond, stochastically attach child nodes with probability p_g. With probability p_a, also attach a random ancestor.
+2. Boundary bonds – With probability p_b = 0.3, add a spacelike edge between two random boundary nodes; the boundary self‑organizes into a 1D chain.
+3. Entanglement entropy – For a boundary interval, compute the minimal cut through the undirected graph (classical) or contract a tensor network (quantum).
+
+---
+
+🏷️ Citation
+
+If you use this code or ideas from these papers in your own research, please cite the appropriate paper(s):
+
+Paper 1
+
+```bibtex
+@article{Anderson2026ensemble,
+  title     = {Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography},
+  author    = {Anderson, Heidi},
+  journal   = {submitted to Physical Review D},
+  year      = {2026},
+  doi       = {10.5281/zenodo.18626027}
+}
+```
+
+Paper 2
+
+```bibtex
+@article{Anderson2026regularity,
+  title     = {From Hubs to Holography: How Graph Regularity Unlocks Entanglement},
+  author    = {Anderson, Heidi},
+  journal   = {submitted to Physical Review D},
+  year      = {2026},
+  doi       = {10.5281/zenodo.18647441}
+}
+```
+
+Paper 3
+
+```bibtex
+@article{Anderson2026removal,
+  title     = {Hub Removal and the Vanishing of Entanglement in Causal Graphs},
+  author    = {Anderson, Heidi},
+  journal   = {submitted to Physical Review D},
+  year      = {2026},
+  doi       = {10.5281/zenodo.18665129}
+}
+```
+
+A CITATION.cff file is included in this repository – GitHub will automatically show a “Cite this repository” button.
+
+---
+
+📄 License
+
+This project is licensed under the MIT License – see the LICENSE file for details.
+
+---
+
+🙏 Acknowledgements
+
+· The open‑source scientific Python community (NumPy, NetworkX, Matplotlib, SciPy, Pandas, Quimb)
+· The anonymous reviewers for their constructive feedback
+· This research received no specific grant from any funding agency
+
+---
+
+Maintained by Heidi Anderson
+📧 heidilanderson0@gmail.com
+🐙 https://github.com/ComradeHB
+🗓️ Last updated: February 16, 2026
+
+```
+
+---
+
+## 2. Updated `paper3/README.md`
+
+```markdown
+# Paper 3: Hub Removal and the Vanishing of Entanglement
+
+This folder contains the final PDF, figures, bibliography, and raw data for the third paper in the series.
+
+## DOI
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18665129.svg)](https://doi.org/10.5281/zenodo.18665129)
+
+## Files
+- `Hub_Removal_and_the_Vanishing_of_Entanglement.pdf` – final compiled paper
+- `classical_ensemble.png` – Figure 1 (classical cut evolution with error band)
+- `quantum_ensemble.png` – Quantum entropy plot (for reference, not included in paper)
+- `Refs.bib` – bibliography file
+
+## Data
+Raw ensemble statistics are available in the [`data/`](/paper3/data) folder:
+- `classical_ensemble.csv` – mean and std of classical cut at each evaporation step (20‑graph ensemble)
+- `quantum_summary.csv` – mean and std of quantum entropy at snapshot steps (50, 100, 150, 200)
+- `quantum_detailed.csv` – all raw quantum measurements (every graph, every split)
+
+## Code
+Simulation scripts will be added soon to the [`code/`](/paper3/code) folder.
+
+## Related Papers
+- **Paper 1:** Classical foundation ([`/paper1`](/paper1)) – DOI: 10.5281/zenodo.18626027
+- **Paper 2:** Mechanism discovery ([`/paper2`](/paper2)) – DOI: 10.5281/zenodo.18647441
+- **This Paper:** Dynamical confirmation ([`/paper3`](/paper3)) – DOI: 10.5281/zenodo.18665129
+
+## Citation
+If you use this work, please cite:
+
+```
+
+Anderson, H. (2026). Hub Removal and the Vanishing of Entanglement in Causal Graphs. Submitted to Physical Review D. doi: 10.5281/zenodo.18665129
+
+```
+
+## DOI Badge
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18665129.svg)](https://doi.org/10.5281/zenodo.18665129)
+```
 
 This repository contains the complete simulation code and analysis pipeline for two companion papers:
 
