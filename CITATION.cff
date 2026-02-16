@@ -1,12 +1,21 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite our paper."
+message: "If you use this software, please cite it as below."
 authors:
-  - family-names: "Anderson"
-    given-names: "Heidi"
-    email: "heidilanderson0@gmail.com"
-title: "Ensemble Statistics of Linear Entanglement Scaling in a Causal Graph Model for de Sitter Holography"
-version: 1.0.0
-date-released: 2026-02-12
+  - family-names: Anderson
+    given-names: Heidi
+    affiliation: "Independent Researcher"
+    email: heidilanderson0@gmail.com
+    orcid: "https://orcid.org/0009-0006-4258-9433"
+title: "causal-holographic-universe"
+version: v1.2.0
 doi: 10.5281/zenodo.18647441
+date-released: 2026-02-16
+url: "https://github.com/ComradeHB/causal-holographic-universe"
 repository-code: "https://github.com/ComradeHB/causal-holographic-universe"
 license: MIT
+keywords:
+  - holography
+  - tensor networks
+  - causal graphs
+  - entanglement entropy
+  - de Sitter
